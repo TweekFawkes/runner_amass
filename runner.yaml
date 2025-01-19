@@ -15,7 +15,7 @@ build:
     mkdir -p /go/src
     mkdir -p /go/bin
     cd /tmp && git clone https://github.com/owasp-amass/amass.git
-    cd /tmp/katana && go install -v ./...
+    cd /tmp/amass && go install -v ./...
     echo "END: Building the runner"
 
 webform:
