@@ -1,0 +1,28 @@
+runner:
+  name: Discover Subdomains
+  description: Performs network mapping of attack surfaces and external asset discovery using open source information gathering and active reconnaissance techniques.
+  version: 0.0.1
+
+build:
+  commands: |
+    echo "START: Building the runner"
+    apt install -y build-essential
+    wget https://go.dev/dl/go1.19.13.linux-amd64.tar.gz && tar -C /usr/local -xzf go1.19.13.linux-amd64.tar.gz && rm go1.19.13.linux-amd64.tar.gz
+    ENV GOROOT=/usr/local/go
+    ENV GOPATH=/go
+    ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+    ENV CGO_ENABLED=1
+    mkdir -p /go/src
+    mkdir -p /go/bin
+    cd /tmp && git clone https://github.com/owasp-amass/amass.git
+    cd /tmp/katana && go install -v ./...
+    echo "END: Building the runner"
+
+webform:
+  - name: root_domain
+    prompt: File to Convert to Markdown
+    type: text
+
+launch:
+  type: binary
+  command: amass enum -o outputs/subdomains.txt -oA outputs/discovery -d ${root_domain}
