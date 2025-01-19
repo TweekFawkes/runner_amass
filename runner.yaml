@@ -20,7 +20,7 @@ build:
 
 webform:
   - name: root_domain
-    prompt: File to Convert to Markdown
+    prompt: Root Domain Name
     type: text
 
 launch:
