@@ -26,4 +26,4 @@ webform:
 
 launch:
   type: binary
-  command: amass enum -o outputs/subdomains.txt -oA outputs/discovery -d ${root_domain}
+  command: amass enum -passive -d ${root_domain} -src
